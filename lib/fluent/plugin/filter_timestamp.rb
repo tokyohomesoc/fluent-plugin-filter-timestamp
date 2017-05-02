@@ -21,7 +21,7 @@ module Fluent
       tag = (@add_prefix + '.' + tag) if @add_prefix
 
       es.each do |time,record|
-        record[@key_postfix] = Strptime.new(@key_format).exec(@key_time).strftime('%Y-%m-%dT%H:%M:%S%z') rescue nil
+        record[@key_postfix] = Strptime.new(@key_format).exec(record[@key_time]).strftime('%Y-%m-%dT%H:%M:%S%z') rescue nil
         new_es.add(time, record)
       end
       return new_es
